@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace CameraKitRental.Models;
 
-public class CameraKit
+public class RentalItem
+{
+    // Base class for rental items
+}   
+public class CameraKit : RentalItem
 {
     public string Brand { get; set; } = string.Empty;
     public string Model { get; set; } = string.Empty;
