@@ -48,17 +48,33 @@ public abstract class RentalItem
 public class CameraKit : RentalItem, IRentable
 {
   
-  
-    public CameraKit(string brand, string model, double dailyRate) : base(brand, model, dailyRate)
+    public string AssetTag { get; set; } = string.Empty;    
+
+    public string KitType { get; set; } = string.Empty;
+
+    public CameraKit(string brand, string model, string assetTag, string kitType, double dailyRate) : base(brand, model, dailyRate)
     {
 
-       
+
+        if (string.IsNullOrWhiteSpace(assetTag) || string.IsNullOrWhiteSpace(kitType))
+        {
+            Console.WriteLine("Invalid parameters provided.");
+            throw new ArgumentException("assetTag and kitType cannot be empty");
+
+        }
+
+
+
+
+        AssetTag = assetTag;
+        KitType = kitType;
+
     }
     public override void Display()
     {
         //Console.WriteLine("CameraKit Display method called.");
         Console.WriteLine(new string('*', 40));
-        Console.WriteLine($"Brand: {Brand}, Model: {Model}, Daily Rate: {DailyRate}, Booked: {Booked}");
+        Console.WriteLine($"Brand: {Brand}, Model: {Model}, Asset Tag: {AssetTag}, KitType: {KitType},Daily Rate: {DailyRate}, Booked: {Booked}");
         Console.WriteLine(new string('*', 40));
     }
 

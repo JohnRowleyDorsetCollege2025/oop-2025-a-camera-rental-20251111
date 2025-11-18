@@ -10,7 +10,7 @@ namespace CameraKitRental.Models
     {
         public static void Run()
         {
-            CameraKit cameraKit = new CameraKit("Canon","Model1",230.33);
+            CameraKit cameraKit = new CameraKit("Canon","Model1","Camera1","MirrorLess", 230.33);
             
             cameraKit.Display();
 
@@ -28,7 +28,7 @@ namespace CameraKitRental.Models
 
             try
             {
-                CameraKit cameraItem = new CameraKit("", "", 255.33);
+                CameraKit cameraItem = new CameraKit("", "", "", "", 255.33);
                 cameraItem.Display();
             }
             catch(ArgumentException ex)
