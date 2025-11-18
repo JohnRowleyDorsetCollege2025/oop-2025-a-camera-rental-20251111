@@ -2,7 +2,7 @@ using CameraKitRental.Models;
 
 namespace CamerKitRental.Tests
 {
-    public class UnitTest1
+    public class CameraKitUnitTests
     {
 
         private CameraKit CreateDefaultCameraKit(bool booked = false)
@@ -25,7 +25,7 @@ namespace CamerKitRental.Tests
         [Fact]
         public void Constructor_Empty_Brand_ThrowsArgumentException()
         {
-           Assert.Throws<ArgumentException>(() => new CameraKit("", "Model1", "Camera1", "MirrorLess", 230.33));
+            Assert.Throws<ArgumentException>(() => new CameraKit("", "Model1", "Camera1", "MirrorLess", 230.33));
         }
 
         [Fact]
@@ -43,6 +43,24 @@ namespace CamerKitRental.Tests
         public void Constructor_Empty_AssetType_ThrowsArgumentException()
         {
             Assert.Throws<ArgumentException>(() => new CameraKit("xxxxx", "xxxxx", "", "Camera1", 230.33));
+        }
+
+        [Fact]
+        public void Book_WhenNotBooked_SetsBookedTrueAndReturnsTrue()
+        {
+
+            //Arrange
+            var cameraKit = CreateDefaultCameraKit();
+
+            Assert.False(cameraKit.isBooked());
+
+            //Act
+            bool result = cameraKit.Book();
+
+            //Assert
+            Assert.True(result);
+            Assert.True(cameraKit.isBooked());
+
         }
 
 

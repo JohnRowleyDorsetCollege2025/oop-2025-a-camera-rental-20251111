@@ -63,9 +63,6 @@ public class CameraKit : RentalItem, IRentable
 
         }
 
-
-
-
         AssetTag = assetTag;
         KitType = kitType;
 
