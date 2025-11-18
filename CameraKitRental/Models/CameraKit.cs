@@ -6,6 +6,19 @@ using System.Threading.Tasks;
 
 namespace CameraKitRental.Models;
 
+public interface IRentable
+{
+    bool Book();    
+    void ReturnItem();  
+    void Display();
+    bool isBooked();
+
+    double CheckRate();
+    void ChangeRate(double newRate);
+}
+
+
+
 public abstract class RentalItem
 {
     // Base class for rental items
@@ -32,16 +45,14 @@ public abstract class RentalItem
 
     public abstract void Display();
 }   
-public class CameraKit : RentalItem
+public class CameraKit : RentalItem, IRentable
 {
   
   
     public CameraKit(string brand, string model, double dailyRate) : base(brand, model, dailyRate)
     {
 
-        Brand = brand;
-        Model = model;
-        DailyRate = dailyRate;
+       
     }
     public override void Display()
     {
@@ -51,16 +62,18 @@ public class CameraKit : RentalItem
         Console.WriteLine(new string('*', 40));
     }
 
-    public void Book()
+    public bool Book()
     {
         if (!Booked)
         {
             Booked = true;
             Console.WriteLine($"CameraKit {Brand} {Model} has been booked.");
+            return true;
         }
         else
         {
             Console.WriteLine($"CameraKit {Brand} {Model} is already booked.");
+            return false;
         }
 
     }
@@ -80,5 +93,23 @@ public class CameraKit : RentalItem
     }
     public bool isBooked() => Booked;
 
-   
+    public double CheckRate() => DailyRate; 
+
+    public void ChangeRate(double newRate)
+    {
+        if (newRate > 0)
+        {
+            DailyRate = newRate;
+            Console.WriteLine($"CameraKit {Brand} {Model} rate changed to {DailyRate}.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid rate. Rate must be greater than zero.");
+        }
+    }
+
+
 }
+
+
+
