@@ -6,22 +6,17 @@ using System.Threading.Tasks;
 
 namespace CameraKitRental.Models;
 
-public class RentalItem
+public abstract class RentalItem
 {
     // Base class for rental items
-}   
-public class CameraKit : RentalItem
-{
     public string Brand { get; set; } = string.Empty;
     public string Model { get; set; } = string.Empty;
     public double DailyRate { get; set; } = 0.0;
 
     public bool Booked { get; protected set; } = false;
-    public CameraKit()
-    {
-        Console.WriteLine("CameraKit instance created.");
-    }
-    public CameraKit(string brand, string model, double dailyRate)
+
+
+    protected RentalItem(string brand, string model, double dailyRate)
     {
         if (string.IsNullOrWhiteSpace(brand) || string.IsNullOrWhiteSpace(model) || dailyRate <= 0)
         {
@@ -30,13 +25,25 @@ public class CameraKit : RentalItem
 
         }
 
+        Brand = brand;
+        Model = model;
+        DailyRate = dailyRate;
+    }
 
+    public abstract void Display();
+}   
+public class CameraKit : RentalItem
+{
+  
+  
+    public CameraKit(string brand, string model, double dailyRate) : base(brand, model, dailyRate)
+    {
 
         Brand = brand;
         Model = model;
         DailyRate = dailyRate;
     }
-    public void Display()
+    public override void Display()
     {
         //Console.WriteLine("CameraKit Display method called.");
         Console.WriteLine(new string('*', 40));
@@ -73,4 +80,5 @@ public class CameraKit : RentalItem
     }
     public bool isBooked() => Booked;
 
+   
 }
